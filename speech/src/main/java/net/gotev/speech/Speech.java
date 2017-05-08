@@ -244,12 +244,10 @@ public class Speech {
     };
 
     private Speech(Context context) {
-        initSpeechRecognizer(context);
         initTts(context);
     }
 
     private Speech(Context context, String callingPackage) {
-        initSpeechRecognizer(context);
         initTts(context);
         mCallingPackage = callingPackage;
     }
