@@ -538,6 +538,7 @@ public class Speech {
         } else {
             HashMap<String, String> params = new HashMap<>();
             params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, utteranceId);
+            params.put(TextToSpeech.Engine.KEY_FEATURE_NETWORK_SYNTHESIS, Boolean.TRUE.toString());
             mTextToSpeech.speak(message, mTtsQueueMode, params);
         }
     }
