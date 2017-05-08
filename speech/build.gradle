@@ -6,9 +6,9 @@ def siteUrl = 'https://github.com/gotev/android-speech'
 def gitUrl = 'https://github.com/gotev/android-speech.git'
 def projectName = "android-speech"
 def projectDesc = "Android speech recognition and text to speech made easy"
-def projectGroup = "net.gotev"
+def projectGroup = "com.github.jd-alexander"
 group = projectGroup
-version = "1.1.9"
+version = "1.2.0"
 
 def targetSdk = 25
 
