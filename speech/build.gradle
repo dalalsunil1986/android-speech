@@ -8,7 +8,7 @@ def projectName = "android-speech"
 def projectDesc = "Android speech recognition and text to speech made easy"
 def projectGroup = "com.github.jd-alexander"
 group = projectGroup
-version = "1.2.0"
+version = "1.2.1"
 
 def targetSdk = 25
 

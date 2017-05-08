@@ -291,6 +291,8 @@ public class Speech {
             mTextToSpeech.setLanguage(mLocale);
             mTextToSpeech.setPitch(mTtsPitch);
             mTextToSpeech.setSpeechRate(mTtsRate);
+
+
         }
     }
 
@@ -320,7 +322,7 @@ public class Speech {
     /**
      * Initializes speech recognition.
      *
-     * @param context application context
+     * @param context        application context
      * @param callingPackage The extra key used in an intent to the speech recognizer for
      *                       voice search. Not generally to be used by developers.
      *                       The system search dialog uses this, for example, to set a calling
@@ -362,6 +364,7 @@ public class Speech {
 
     /**
      * Gets speech recognition instance.
+     *
      * @return SpeechRecognition instance
      */
     public static Speech getInstance() {
@@ -374,8 +377,9 @@ public class Speech {
 
     /**
      * Starts voice recognition.
+     *
      * @param delegate delegate which will receive speech recognition events and status
-     * @throws SpeechRecognitionNotAvailable when speech recognition is not available on the device
+     * @throws SpeechRecognitionNotAvailable      when speech recognition is not available on the device
      * @throws GoogleVoiceTypingDisabledException when google voice typing is disabled on the device
      */
     public void startListening(SpeechDelegate delegate)
@@ -385,9 +389,10 @@ public class Speech {
 
     /**
      * Starts voice recognition.
+     *
      * @param progressView view in which to draw speech animation
-     * @param delegate delegate which will receive speech recognition events and status
-     * @throws SpeechRecognitionNotAvailable when speech recognition is not available on the device
+     * @param delegate     delegate which will receive speech recognition events and status
+     * @throws SpeechRecognitionNotAvailable      when speech recognition is not available on the device
      * @throws GoogleVoiceTypingDisabledException when google voice typing is disabled on the device
      */
     public void startListening(SpeechProgressView progressView, SpeechDelegate delegate)
@@ -506,6 +511,7 @@ public class Speech {
 
     /**
      * Check if voice recognition is currently active.
+     *
      * @return true if the voice recognition is on, false otherwise
      */
     public boolean isListening() {
@@ -514,6 +520,7 @@ public class Speech {
 
     /**
      * Uses text to speech to transform a written message into a sound.
+     *
      * @param message message to play
      */
     public void say(String message) {
@@ -522,7 +529,8 @@ public class Speech {
 
     /**
      * Uses text to speech to transform a written message into a sound.
-     * @param message message to play
+     *
+     * @param message  message to play
      * @param callback callback which will receive progress status of the operation
      */
     public void say(String message, TextToSpeechCallback callback) {
@@ -533,14 +541,11 @@ public class Speech {
             mTtsCallbacks.put(utteranceId, callback);
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mTextToSpeech.speak(message, mTtsQueueMode, null, utteranceId);
-        } else {
-            HashMap<String, String> params = new HashMap<>();
-            params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, utteranceId);
-            params.put(TextToSpeech.Engine.KEY_FEATURE_NETWORK_SYNTHESIS, Boolean.TRUE.toString());
-            mTextToSpeech.speak(message, mTtsQueueMode, params);
-        }
+        HashMap<String, String> params = new HashMap<>();
+        params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, utteranceId);
+        params.put(TextToSpeech.Engine.KEY_FEATURE_NETWORK_SYNTHESIS, Boolean.TRUE.toString());
+        mTextToSpeech.speak(message, mTtsQueueMode, params);
+
     }
 
     /**
@@ -555,6 +560,7 @@ public class Speech {
     /**
      * Set whether to only use an offline speech recognition engine.
      * The default is false, meaning that either network or offline recognition engines may be used.
+     *
      * @param preferOffline true to prefer offline engine, false to use either one of the two
      * @return speech instance
      */
@@ -566,6 +572,7 @@ public class Speech {
     /**
      * Set whether partial results should be returned by the recognizer as the user speaks
      * (default is true). The server may ignore a request for partial results in some or all cases.
+     *
      * @param getPartialResults true to get also partial recognition results, false otherwise
      * @return speech instance
      */
@@ -577,6 +584,7 @@ public class Speech {
     /**
      * Sets text to speech and recognition language.
      * Defaults to device language setting.
+     *
      * @param locale new locale
      * @return speech instance
      */
@@ -588,9 +596,10 @@ public class Speech {
 
     /**
      * Sets the speech rate. This has no effect on any pre-recorded speech.
-     * @param rate  Speech rate. 1.0 is the normal speech rate, lower values slow down the speech
-     *              (0.5 is half the normal speech rate), greater values accelerate it
-     *              (2.0 is twice the normal speech rate).
+     *
+     * @param rate Speech rate. 1.0 is the normal speech rate, lower values slow down the speech
+     *             (0.5 is half the normal speech rate), greater values accelerate it
+     *             (2.0 is twice the normal speech rate).
      * @return speech instance
      */
     public Speech setTextToSpeechRate(float rate) {
@@ -602,6 +611,7 @@ public class Speech {
     /**
      * Sets the speech pitch for the TextToSpeech engine.
      * This has no effect on any pre-recorded speech.
+     *
      * @param pitch Speech pitch. 1.0 is the normal pitch, lower values lower the tone of the
      *              synthesized voice, greater values increase it.
      * @return speech instance
@@ -614,6 +624,7 @@ public class Speech {
 
     /**
      * Sets the idle timeout after which the listening will be automatically stopped.
+     *
      * @param milliseconds timeout in milliseconds
      * @return speech instance
      */
@@ -626,6 +637,7 @@ public class Speech {
     /**
      * Sets the minimum interval between start/stop events. This is useful to prevent
      * monkey input from users.
+     *
      * @param milliseconds minimum interval betweeb state change in milliseconds
      * @return speech instance
      */
@@ -639,6 +651,7 @@ public class Speech {
      * By default is TextToSpeech.QUEUE_FLUSH, which is faster, because it clears all the
      * messages before speaking the new one. TextToSpeech.QUEUE_ADD adds the last message
      * to speak in the queue, without clearing the messages that have been added.
+     *
      * @param mode It can be either TextToSpeech.QUEUE_ADD or TextToSpeech.QUEUE_FLUSH.
      * @return speech instance
      */
